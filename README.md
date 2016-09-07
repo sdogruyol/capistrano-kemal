@@ -1,36 +1,40 @@
-# Capistrano::Kemal
+# capistrano-kemal
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/kemal`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a Capistrano v3 plugin that integrates Kemal tasks into capistrano deployment scripts to ease deployment.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add `capistrano-kemal` to your `Gemfile`.
 
 ```ruby
 gem 'capistrano-kemal'
+
 ```
 
-And then execute:
+Load `capistrano-kemal` in your `Capfile`.
 
-    $ bundle
 
-Or install it yourself as:
+```ruby
+require 'capistrano/kemal'
+```
 
-    $ gem install capistrano-kemal
+That's it.
 
-## Usage
+## Example
 
-TODO: Write usage instructions here
+Here's an example 
 
-## Development
+```ruby
+set :application, 'your-app'
+set :repo_url, 'git@github.com:username/your-app.git'
+set :deploy_to, '/home/user/apps/your-app/'
+set :kemal_env, 'production'
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
+after 'deploy:publishing', 'kemal:restart'
+```
+ 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/capistrano-kemal.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sdogruyol/capistrano-kemal.
 
