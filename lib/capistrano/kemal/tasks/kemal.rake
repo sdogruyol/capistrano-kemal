@@ -1,7 +1,7 @@
 namespace :load do
   task :defaults do
     set :kemal_pid, -> { File.join(shared_path, "kemal.pid") }
-    set :kemal_file, 'app.cr'
+    set :kemal_file, 'src/app.cr'
     set :kemal_env, 'development'
     set :kemal_log_file, 'kemal.log'
   end
@@ -10,8 +10,8 @@ end
 namespace :deploy do
   after :updated, :build do
     on roles(:web) do
-      execute "cd '#{release_path}' && shards install"
-      execute "cd '#{release_path}' && crystal build --release src/#{fetch(:kemal_file)}"
+      execute "cd '#{release_path}' && shards install --production"
+      execute "cd '#{release_path}' && crystal build --release #{fetch(:kemal_file)}"
     end
   end
 end
