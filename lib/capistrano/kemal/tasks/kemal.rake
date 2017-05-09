@@ -10,7 +10,7 @@ end
 namespace :deploy do
   after :updated, :build do
     on roles(:web) do
-      execute "cd '#{release_path}' && shards install"
+      execute "cd '#{release_path}' && shards install --production"
       execute "cd '#{release_path}' && crystal build --release src/#{fetch(:kemal_file)}"
     end
   end
